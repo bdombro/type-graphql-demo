@@ -1,0 +1,36 @@
+{
+  "name": "type-graphql-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "//": "Tip here",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node -r tsconfig-paths/register src/index.ts",
+    "dev": "NODE_ENV=development ts-node-dev -r tsconfig-paths/register src/index.ts",
+    "bootstrap": "cd ../.. && yarn && cd - && yarn && yarn db:create",
+    "typeorm:cli": "dotenv -- ts-node ./node_modules/.bin/typeorm",
+    "db:create": "createdbjs $(dotenv -p TYPEORM_DATABASE) 2>&1 || :"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.4.8",
+    "dotenv": "^7.0.0",
+    "dotenv-cli": "^2.0.0",
+    "dotenvi": "^0.5.1",
+    "graphql": "^14.2.1",
+    "pg": "^7.9.0",
+    "pgtools": "^0.3.0",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^8.1.0",
+    "ts-node-dev": "^1.0.0-pre.32",
+    "tsconfig-paths": "^3.8.0",
+    "type-graphql": "^0.17.1",
+    "typedi": "^0.8.0",
+    "typeorm": "^0.2.16",
+    "typeorm-typedi-extensions": "^0.2.3",
+    "typescript": "^3.4.3"
+  }
+}
