@@ -2,11 +2,11 @@ import { ObjectType, Field, Int } from "type-graphql";
 import { PrimaryGeneratedColumn, Column, Entity } from "typeorm";
 
 import { Resource } from "../resource/resource";
-import { PersonRole } from "./person.role";
+import { UserRole } from "./user.role";
 
 @ObjectType()
 @Entity()
-export class Person implements Resource {
+export class User implements Resource {
   @Field()
   @PrimaryGeneratedColumn()
   readonly id: number;
@@ -19,7 +19,7 @@ export class Person implements Resource {
   @Column()
   age: number;
 
-  @Field(type => PersonRole)
+  @Field(type => UserRole)
   @Column()
-  role: PersonRole;
+  role: UserRole;
 }

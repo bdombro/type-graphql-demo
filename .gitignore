@@ -48,3 +48,4 @@ tmp
 # Generated
 generated/*
 !generated/schema.ts
+!generated/migrations

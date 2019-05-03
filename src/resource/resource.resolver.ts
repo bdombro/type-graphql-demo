@@ -15,7 +15,7 @@ import {InjectRepository} from "typeorm-typedi-extensions";
 
 import {Resource} from "./resource";
 import {getRepository, Repository} from "typeorm";
-import {Person} from "../person/person.type";
+import {User} from "../user/user.type";
 
 @ArgsType()
 export class GetAllArgs {
@@ -28,7 +28,7 @@ export class GetAllArgs {
 
 export function ResourceResolver<TResource extends Resource>(
     ResourceCls: ClassType
-    // ResourceCls: Person
+    // ResourceCls: User
 ) {
     const resourceName = ResourceCls.name.toLocaleLowerCase();
 
@@ -39,13 +39,13 @@ export function ResourceResolver<TResource extends Resource>(
         // protected repository: ResourceService<TResource>;
         // @ts-ignore
         protected repository: Repository<ResourceCls>;
-        // @InjectRepository(Person)
-        // public repository: Repository<Person>;
+        // @InjectRepository(User)
+        // public repository: Repository<User>;
 
         constructor(
             // @ts-ignore
             // @InjectRepository(ResourceCls) public readonly repository: Repository<ResourceCls>,
-            // @InjectRepository(Person) public readonly repository: Repository<Person>,
+            // @InjectRepository(User) public readonly repository: Repository<User>,
         ) {
             // this.repository = getRepository(ResourceCls);
             // this.repository.findOne(1).then(r => console.dir(r.role))

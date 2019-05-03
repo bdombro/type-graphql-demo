@@ -7,16 +7,20 @@
     "//": "Tip here",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node -r tsconfig-paths/register src/index.ts",
-    "dev": "NODE_ENV=development ts-node-dev -r tsconfig-paths/register src/index.ts",
+    "dev:main": "NODE_ENV=development ts-node-dev -r tsconfig-paths/register src/index.ts",
+    "dev:postgres": "cd postgres && docker-compose up --build",
+    "dev": "concurrently --kill-others npm:dev:main npm:dev:postgres",
     "bootstrap": "cd ../.. && yarn && cd - && yarn && yarn db:create",
     "typeorm:cli": "dotenv -- ts-node ./node_modules/.bin/typeorm",
-    "db:create": "createdbjs $(dotenv -p TYPEORM_DATABASE) 2>&1 || :"
+    "db:create": "createdbjs $(dotenv -p TYPEORM_DATABASE) 2>&1 || :",
+    "db:drop": "dropdbjs $(dotenv -p TYPEORM_DATABASE) 2>&1 || :"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.4.8",
+    "concurrently": "^4.1.0",
     "dotenv": "^7.0.0",
     "dotenv-cli": "^2.0.0",
     "dotenvi": "^0.5.1",
@@ -27,9 +31,9 @@
     "ts-node": "^8.1.0",
     "ts-node-dev": "^1.0.0-pre.32",
     "tsconfig-paths": "^3.8.0",
-    "type-graphql": "^0.17.1",
+    "type-graphql": "^0.17.3",
     "typedi": "^0.8.0",
-    "typeorm": "^0.2.16",
+    "typeorm": "^0.2.17",
     "typeorm-typedi-extensions": "^0.2.3",
     "typescript": "^3.4.3"
   }

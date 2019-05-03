@@ -4,17 +4,11 @@ import { Container } from "typedi";
 import * as TypeORM from "typeorm";
 import * as TypeGraphQL from "type-graphql";
 
-import { RecipeResolver } from "./resolvers/recipe-resolver";
-import { RateResolver } from "./resolvers/rate-resolver";
-import { Recipe } from "./entities/recipe";
-import { Rate } from "./entities/rate";
-import { User } from "./entities/user";
-import { Person } from "./person/person.type";
-import { PersonResolver } from "./person/person.resolver";
-import { seedDatabase } from "./helpers";
+import { UserResolver } from "./user/user.resolver";
+import { SeedDatabase } from "./SeedDatabase";
 
 export interface Context {
-  user: User;
+  // user: User;
 }
 
 // register 3rd party IOC container
@@ -26,16 +20,16 @@ async function bootstrap() {
     await TypeORM.createConnection();
 
     // seed database with some data
-    const { defaultUser } = await seedDatabase();
+    await SeedDatabase();
 
     // build TypeGraphQL executable schema
     const schema = await TypeGraphQL.buildSchema({
-      resolvers: [RecipeResolver, RateResolver, PersonResolver],
+      resolvers: [UserResolver],
       container: Container,
     });
 
     // create mocked context
-    const context: Context = { user: defaultUser };
+    const context: Context = {};
 
     // Create GraphQL server
     const server = new ApolloServer({ schema, context });
